@@ -35,8 +35,8 @@ const IndustryHelp = () => {
         <Text style={styles.sectionTitle}>Commonly Asked Questions</Text>
         <View style={styles.faqContainer}>
           <FAQItem 
-            question="How to connect with industries?" 
-            answer="Learn how to establish connections with farmers."
+            question="How to connect with farmer directly?" 
+            answer="You can contact a farmer via the Farmer Profile section in each transaction card or posted demand."
           />
           <FAQItem 
             question="How do I reset my password?" 

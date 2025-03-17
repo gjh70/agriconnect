@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -7,12 +7,12 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import CheckBox from '@react-native-community/checkbox'; 
+import CheckBox from '@react-native-community/checkbox';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
-const IndustryProfileEdit = () => {
+const FarmerProfileEdit = () => {
   const navigation = useNavigation();
   const [activeTab, setActiveTab] = useState('Profile');
   const [selectedSection, setSelectedSection] = useState('Profile Details');
@@ -30,8 +30,8 @@ const IndustryProfileEdit = () => {
     Soybeans: false,
   });
 
-  const toggleMaterial = (item) => {
-    setSelectedRawMaterials((prev) => ({
+  const toggleMaterial = item => {
+    setSelectedRawMaterials(prev => ({
       ...prev,
       [item]: !prev[item],
     }));
@@ -62,8 +62,7 @@ const IndustryProfileEdit = () => {
             style={[
               styles.tabText,
               selectedSection === 'Profile Details' && styles.activeTab,
-            ]}
-          >
+            ]}>
             Profile Details
           </Text>
         </TouchableOpacity>
@@ -72,8 +71,7 @@ const IndustryProfileEdit = () => {
             style={[
               styles.tabText,
               selectedSection === 'Add Raw Material' && styles.activeTab,
-            ]}
-          >
+            ]}>
             Add Raw Material
           </Text>
         </TouchableOpacity>
@@ -85,29 +83,29 @@ const IndustryProfileEdit = () => {
           style={styles.input}
           placeholder="Enter your name"
           value={form.name}
-          onChangeText={(text) => setForm({ ...form, name: text })}
+          onChangeText={text => setForm({...form, name: text})}
         />
         <TextInput
           style={styles.input}
           placeholder="Enter your location"
           value={form.location}
-          onChangeText={(text) => setForm({ ...form, location: text })}
+          onChangeText={text => setForm({...form, location: text})}
         />
         <TextInput
           style={styles.input}
           placeholder="Enter your contact information"
           value={form.contact}
-          onChangeText={(text) => setForm({ ...form, contact: text })}
+          onChangeText={text => setForm({...form, contact: text})}
         />
 
         {/* Raw Materials */}
         <Text style={styles.sectionTitle}>Raw Material Grown</Text>
-        {Object.keys(selectedRawMaterials).map((item) => (
+        {Object.keys(selectedRawMaterials).map(item => (
           <View key={item} style={styles.checkboxRow}>
             <CheckBox
               value={selectedRawMaterials[item]}
               onValueChange={() => toggleMaterial(item)}
-              tintColors={{ true: '#0f9b6e', false: '#aaa' }}
+              tintColors={{true: '#0f9b6e', false: '#aaa'}}
             />
             <Text style={styles.checkboxLabel}>{item}</Text>
           </View>
@@ -116,8 +114,7 @@ const IndustryProfileEdit = () => {
         {/* Add Raw Material Button */}
         <TouchableOpacity
           style={styles.addNewBtn}
-          onPress={() => navigation.navigate('IndustryMaterial')}
-        >
+          onPress={() => navigation.navigate('FarmerMaterial')}>
           <FeatherIcon name="user-plus" size={18} color="#0f9b6e" />
           <Text style={styles.addNewBtnText}>Add New Raw Material</Text>
         </TouchableOpacity>
@@ -136,19 +133,22 @@ const IndustryProfileEdit = () => {
       {/* Bottom Navigation Bar */}
       <View style={styles.bottomNav}>
         {[
-          { name: 'Home', icon: 'home', screen: 'IndustryHome' },
-          { name: 'Transaction', icon: 'account-balance-wallet', screen: 'IndustryTrans' },
-          { name: 'Profile', icon: 'person-outline', screen: 'IndustryProfile' },
-          { name: 'Help', icon: 'help-outline', screen: 'IndustryHelp' },
-        ].map((tab) => (
+          {name: 'Home', icon: 'home', screen: 'FarmerHome'},
+          {
+            name: 'Transaction',
+            icon: 'account-balance-wallet',
+            screen: 'FarmerTrans',
+          },
+          {name: 'Profile', icon: 'person-outline', screen: 'FarmerProfile'},
+          {name: 'Help', icon: 'help-outline', screen: 'FarmerHelp'},
+        ].map(tab => (
           <TouchableOpacity
             key={tab.name}
             style={styles.navItem}
             onPress={() => {
               setActiveTab(tab.name);
               navigation.navigate(tab.screen);
-            }}
-          >
+            }}>
             <MaterialIcon
               name={tab.icon}
               size={28}
@@ -158,8 +158,7 @@ const IndustryProfileEdit = () => {
               style={[
                 styles.navText,
                 activeTab === tab.name && styles.activeNavText,
-              ]}
-            >
+              ]}>
               {tab.name}
             </Text>
           </TouchableOpacity>
@@ -300,4 +299,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default IndustryProfileEdit;
+export default FarmerProfileEdit;

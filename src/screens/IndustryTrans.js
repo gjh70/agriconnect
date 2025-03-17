@@ -60,7 +60,7 @@ const IndustryTrans = () => {
         {[
           { name: 'Home', icon: 'home', screen: 'IndustryHome' },
         
-          { name: 'Transaction', icon: 'account-balance-wallet'},
+          { name: 'Transaction', icon: 'account-balance-wallet',screen:'IndustryTrans'},
           { name: 'Profile', icon: 'person-outline',screen:'IndustryProfile'},
           { name: 'Help', icon: 'help-outline',screen:'IndustryHelp' }
         ].map((tab) => (

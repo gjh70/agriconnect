@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,22 +6,40 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import {Checkbox} from 'react-native-paper';
-import Icon from 'react-native-vector-icons/FontAwesome'; // Import icons
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native';
 
-const SignupScreen = () => {
+const FarmerSignin = () => {
+  const navigation = useNavigation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [retypePassword, setRetypePassword] = useState('');
   const [agree, setAgree] = useState(false);
 
+  const handleSignup = () => {
+    if (agree && name && email && password && retypePassword) {
+      // Add form validations if needed
+      navigation.navigate('FarmerHome');
+    } else {
+      alert('Please fill all fields and agree to Terms.');
+    }
+  };
+
   return (
     <View style={styles.container}>
+      {/* Back Button */}
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => navigation.navigate('Login')}
+      >
+        <Icon name="arrow-left" size={24} color="black" />
+      </TouchableOpacity>
+
       <Text style={styles.title}>Create Account</Text>
       <Text style={styles.subtitle}>Create your account to get started</Text>
 
-      {/* Full Name Field */}
+      {/* Full Name */}
       <View style={styles.inputContainer}>
         <Icon name="user" size={20} color="#888" style={styles.icon} />
         <TextInput
@@ -32,7 +50,7 @@ const SignupScreen = () => {
         />
       </View>
 
-      {/* Email Field */}
+      {/* Email */}
       <View style={styles.inputContainer}>
         <Icon name="envelope" size={20} color="#888" style={styles.icon} />
         <TextInput
@@ -44,7 +62,7 @@ const SignupScreen = () => {
         />
       </View>
 
-      {/* Password Field */}
+      {/* Password */}
       <View style={styles.inputContainer}>
         <Icon name="lock" size={20} color="#888" style={styles.icon} />
         <TextInput
@@ -56,7 +74,7 @@ const SignupScreen = () => {
         />
       </View>
 
-      {/* Retype Password Field */}
+      {/* Retype Password */}
       <View style={styles.inputContainer}>
         <Icon name="lock" size={20} color="#888" style={styles.icon} />
         <TextInput
@@ -68,25 +86,37 @@ const SignupScreen = () => {
         />
       </View>
 
-      {/* Checkbox */}
-      <View style={styles.checkboxContainer}>
-        <Checkbox
-          status={agree ? 'checked' : 'unchecked'}
-          onPress={() => setAgree(!agree)}
+      {/* Custom Checkbox */}
+      <TouchableOpacity
+        style={styles.checkboxContainer}
+        onPress={() => setAgree(!agree)}
+        activeOpacity={0.7}
+      >
+        <Icon
+          name={agree ? 'check-square' : 'square-o'}
+          size={20}
+          color={agree ? 'green' : '#888'}
         />
         <Text style={styles.checkboxText}>I agree with Terms & Conditions</Text>
-      </View>
+      </TouchableOpacity>
 
       {/* Sign Up Button */}
       <TouchableOpacity
         style={styles.signupButton}
-        onPress={() => console.log('Signed up')}>
+        onPress={handleSignup}
+      >
         <Text style={styles.signupText}>Sign Up</Text>
       </TouchableOpacity>
 
       {/* Login Link */}
       <Text style={styles.loginText}>
-        Already registered? <Text style={styles.loginLink}>Log In</Text>
+        Already registered?{' '}
+        <Text
+          style={styles.loginLink}
+          onPress={() => navigation.navigate('FarmerLogin')}
+        >
+          Log In
+        </Text>
       </Text>
     </View>
   );
@@ -100,9 +130,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  backButton: {
+    position: 'absolute',
+    top: 40,
+    left: 20,
+    zIndex: 1,
+  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+    marginTop: 60,
     marginBottom: 10,
   },
   subtitle: {
@@ -132,10 +169,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
+    width: '100%',
   },
   checkboxText: {
     fontSize: 14,
-    marginLeft: 5,
+    marginLeft: 10,
+    color: '#333',
   },
   signupButton: {
     width: '100%',
@@ -159,4 +198,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignupScreen;
+export default FarmerSignin;

@@ -20,23 +20,20 @@ const IndustryHome = ({ navigation }) => {
 
   const farmers = [
     { id: '1', name: 'John Smith', creditScore: 7, rawMaterials: ['Corn', 'Wheat'] },
-    { id: '2', name: 'Mary Johnson', creditScore: 7.2, rawMaterials: ['Soybeans', 'Barley'] },
-    { id: '3', name: 'Robert Brown', creditScore: 8, rawMaterials: ['Rice', 'Oats'] }
+    { id: '2', name: 'Mary Johnson', creditScore: 7.2, rawMaterials: ['Soybeans', 'Barley']},
+    { id: '3', name: 'Robert Brown', creditScore: 8, rawMaterials: ['Rice', 'Oats']}
   ];
 
-  // Categories of raw materials
   const filterCategories = ['Grains', 'Vegetables', 'Fruits'];
 
-  // Map categories to raw materials
   const categoryMapping = {
     Grains: ['Corn', 'Wheat', 'Rice', 'Barley', 'Oats'],
     Vegetables: ['Tomatoes', 'Carrots', 'Peppers'],
     Fruits: ['Apples', 'Bananas', 'Grapes']
   };
 
-  // Filter farmers based on selected filters
   const filteredFarmers = farmers.filter((farmer) => {
-    if (selectedFilters.length === 0) return true; // No filters, show all
+    if (selectedFilters.length === 0) return true;
     return farmer.rawMaterials.some((material) =>
       selectedFilters.some((filter) => categoryMapping[filter]?.includes(material))
     );
@@ -46,7 +43,7 @@ const IndustryHome = ({ navigation }) => {
     <View style={styles.container}>
       {/* Header Section */}
       <View style={styles.header}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Icon name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
         <Text style={styles.title}>Farmer Search</Text>
@@ -86,7 +83,6 @@ const IndustryHome = ({ navigation }) => {
       <View style={styles.bottomNav}>
         {[
           { name: 'Home', icon: 'home', screen: 'IndustryHome' },
-          
           { name: 'Transaction', icon: 'account-balance-wallet', screen: 'IndustryTrans' },
           { name: 'Profile', icon: 'person-outline', screen: 'IndustryProfile' },
           { name: 'Help', icon: 'help-outline', screen: 'IndustryHelp' }
@@ -123,7 +119,6 @@ const IndustryHome = ({ navigation }) => {
               </Text>
             </TouchableOpacity>
 
-            {/* Filter Section */}
             <Text style={styles.modalTitle}>Filter By</Text>
             {filterCategories.map((category) => (
               <TouchableOpacity
@@ -160,36 +155,73 @@ const IndustryHome = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FFFFFF', paddingHorizontal: 16 },
 
-  // Header Styles
-  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 10 },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 10
+  },
   title: { fontSize: 18, fontWeight: 'bold', textAlign: 'center', flex: 1 },
 
-  // Search Bar Styles
-  searchContainer: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#F0F0F0', borderRadius: 8, padding: 8, marginBottom: 10 },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F0F0F0',
+    borderRadius: 8,
+    padding: 8,
+    marginBottom: 10
+  },
   searchIcon: { marginRight: 8 },
   searchInput: { flex: 1, fontSize: 16 },
 
-  // Farmer Card Styles
-  card: { flexDirection: 'row', backgroundColor: '#FFFFFF', borderRadius: 8, padding: 10, marginVertical: 5, elevation: 2 },
+  card: {
+    flexDirection: 'row',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 8,
+    padding: 10,
+    marginVertical: 5,
+    elevation: 2
+  },
   farmerImage: { width: 50, height: 50, borderRadius: 25, marginRight: 10 },
   farmerName: { fontSize: 16, fontWeight: 'bold' },
   creditScore: { fontSize: 14, color: '#666' },
   rawMaterials: { fontSize: 14, color: '#666' },
 
-  // Bottom Navigation Styles
-  bottomNav: { flexDirection: 'row', justifyContent: 'space-around', backgroundColor: '#fff', padding: 10, borderTopWidth: 1, borderColor: '#ddd' },
+  bottomNav: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: '#fff',
+    padding: 10,
+    borderTopWidth: 1,
+    borderColor: '#ddd'
+  },
   navItem: { alignItems: 'center' },
   navText: { fontSize: 12, color: 'gray' },
   activeNavText: { color: 'green', fontWeight: 'bold' },
 
-  // Modal Styles
-  modalContainer: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.5)' },
-  modalContent: { width: 300, padding: 20, backgroundColor: 'white', borderRadius: 10, alignItems: 'center' },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)'
+  },
+  modalContent: {
+    width: 300,
+    padding: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    alignItems: 'center'
+  },
   modalTitle: { fontSize: 16, fontWeight: 'bold', marginTop: 10 },
   optionText: { fontSize: 14, marginVertical: 5 },
   selectedText: { color: 'green', fontWeight: 'bold' },
-  closeButton: { marginTop: 15, padding: 10, backgroundColor: 'green', borderRadius: 5 },
-  closeText: { color: 'white', fontWeight: 'bold' },
+  closeButton: {
+    marginTop: 15,
+    padding: 10,
+    backgroundColor: 'green',
+    borderRadius: 5
+  },
+  closeText: { color: 'white', fontWeight: 'bold' }
 });
 
 export default IndustryHome;
