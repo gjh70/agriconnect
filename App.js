@@ -18,6 +18,7 @@ import FarmerSignin from './src/screens/FarmerSignin.js';
 import IndustrySignin from './src/screens/IndustrySignin.js';
 import FarmerLogin from './src/screens/FarmerLogin.js';
 import IndustryLogin from './src/screens/IndustryLogin.js';
+import Farmerinfo from './src/screens/Farmerinfo.js';
 
 const Stack = createStackNavigator();
 
@@ -34,7 +35,10 @@ const App = () => {
         <Stack.Screen name="FarmerHelp" component={FarmerHelp} />
         <Stack.Screen name="IndustryProfile" component={IndustryProfile} />
         <Stack.Screen name="FarmerProfile" component={FarmerProfile} />
-        <Stack.Screen name="IndustryProfileEdit"component={IndustryProfileEdit}/>
+        <Stack.Screen
+          name="IndustryProfileEdit"
+          component={IndustryProfileEdit}
+        />
         <Stack.Screen name="FarmerProfileEdit" component={FarmerProfileEdit} />
         <Stack.Screen name="IndustryMaterial" component={IndustryMaterial} />
         <Stack.Screen name="FarmerMaterial" component={FarmerMaterial} />
@@ -42,6 +46,7 @@ const App = () => {
         <Stack.Screen name="FarmerSignin" component={FarmerSignin} />
         <Stack.Screen name="FarmerLogin" component={FarmerLogin} />
         <Stack.Screen name="IndustryLogin" component={IndustryLogin} />
+        <Stack.Screen name="Farmerinfo" component={Farmerinfo} />
       </Stack.Navigator>
     </NavigationContainer>
   );

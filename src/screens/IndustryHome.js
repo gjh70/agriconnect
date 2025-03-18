@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Modal,
-  TextInput
+  TextInput,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -19,9 +19,27 @@ const IndustryHome = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState('Home');
 
   const farmers = [
-    { id: '1', name: 'John Smith', creditScore: 7, rawMaterials: ['Corn', 'Wheat'] },
-    { id: '2', name: 'Mary Johnson', creditScore: 7.2, rawMaterials: ['Soybeans', 'Barley']},
-    { id: '3', name: 'Robert Brown', creditScore: 8, rawMaterials: ['Rice', 'Oats']}
+    {
+      id: '1',
+      name: 'John Smith',
+      creditScore: 7,
+      rawMaterials: ['Corn', 'Wheat'],
+      
+    },
+    {
+      id: '2',
+      name: 'Mary Johnson',
+      creditScore: 7.2,
+      rawMaterials: ['Soybeans', 'Barley'],
+     
+    },
+    {
+      id: '3',
+      name: 'Robert Brown',
+      creditScore: 8,
+      rawMaterials: ['Rice', 'Oats'],
+      
+    },
   ];
 
   const filterCategories = ['Grains', 'Vegetables', 'Fruits'];
@@ -29,7 +47,7 @@ const IndustryHome = ({ navigation }) => {
   const categoryMapping = {
     Grains: ['Corn', 'Wheat', 'Rice', 'Barley', 'Oats'],
     Vegetables: ['Tomatoes', 'Carrots', 'Peppers'],
-    Fruits: ['Apples', 'Bananas', 'Grapes']
+    Fruits: ['Apples', 'Bananas', 'Grapes'],
   };
 
   const filteredFarmers = farmers.filter((farmer) => {
@@ -68,14 +86,25 @@ const IndustryHome = ({ navigation }) => {
         data={filteredFarmers}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.card}>
-            <Image source={{ uri: item.image }} style={styles.farmerImage} />
-            <View>
-              <Text style={styles.farmerName}>{item.name}</Text>
-              <Text style={styles.creditScore}>Credit Score: {item.creditScore}</Text>
-              <Text style={styles.rawMaterials}>Raw Materials: {item.rawMaterials.join(', ')}</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Farmerinfo', { farmer: item })}
+          >
+            <View style={styles.card}>
+              <Image
+                source={{
+                  uri: item.image || 'https://via.placeholder.com/50',
+                }}
+                style={styles.farmerImage}
+              />
+              <View>
+                <Text style={styles.farmerName}>{item.name}</Text>
+                <Text style={styles.creditScore}>Credit Score: {item.creditScore}</Text>
+                <Text style={styles.rawMaterials}>
+                  Raw Materials: {item.rawMaterials.join(', ')}
+                </Text>
+              </View>
             </View>
-          </View>
+          </TouchableOpacity>
         )}
       />
 
@@ -85,7 +114,7 @@ const IndustryHome = ({ navigation }) => {
           { name: 'Home', icon: 'home', screen: 'IndustryHome' },
           { name: 'Transaction', icon: 'account-balance-wallet', screen: 'IndustryTrans' },
           { name: 'Profile', icon: 'person-outline', screen: 'IndustryProfile' },
-          { name: 'Help', icon: 'help-outline', screen: 'IndustryHelp' }
+          { name: 'Help', icon: 'help-outline', screen: 'IndustryHelp' },
         ].map((tab) => (
           <TouchableOpacity
             key={tab.name}
@@ -134,7 +163,7 @@ const IndustryHome = ({ navigation }) => {
                 <Text
                   style={[
                     styles.optionText,
-                    selectedFilters.includes(category) && styles.selectedText
+                    selectedFilters.includes(category) && styles.selectedText,
                   ]}
                 >
                   {category}
@@ -159,7 +188,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 10
+    paddingVertical: 10,
   },
   title: { fontSize: 18, fontWeight: 'bold', textAlign: 'center', flex: 1 },
 
@@ -169,7 +198,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F0F0F0',
     borderRadius: 8,
     padding: 8,
-    marginBottom: 10
+    marginBottom: 10,
   },
   searchIcon: { marginRight: 8 },
   searchInput: { flex: 1, fontSize: 16 },
@@ -180,7 +209,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 10,
     marginVertical: 5,
-    elevation: 2
+    elevation: 2,
   },
   farmerImage: { width: 50, height: 50, borderRadius: 25, marginRight: 10 },
   farmerName: { fontSize: 16, fontWeight: 'bold' },
@@ -193,7 +222,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 10,
     borderTopWidth: 1,
-    borderColor: '#ddd'
+    borderColor: '#ddd',
   },
   navItem: { alignItems: 'center' },
   navText: { fontSize: 12, color: 'gray' },
@@ -203,14 +232,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)'
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
   modalContent: {
     width: 300,
     padding: 20,
     backgroundColor: 'white',
     borderRadius: 10,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   modalTitle: { fontSize: 16, fontWeight: 'bold', marginTop: 10 },
   optionText: { fontSize: 14, marginVertical: 5 },
@@ -219,9 +248,9 @@ const styles = StyleSheet.create({
     marginTop: 15,
     padding: 10,
     backgroundColor: 'green',
-    borderRadius: 5
+    borderRadius: 5,
   },
-  closeText: { color: 'white', fontWeight: 'bold' }
+  closeText: { color: 'white', fontWeight: 'bold' },
 });
 
 export default IndustryHome;
